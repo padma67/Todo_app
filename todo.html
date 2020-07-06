@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Grid view</title>
+    <meta charset="UTF-8" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+
+  <body>
+    <div id="a"></div>
+
+    <script type="text/babel">
+      
+   const App=()=>{
+   const[value,setValue]=React.useState("");
+   const[todos,setTodos]=React.useState([]);
+   const[color,setColor]=React.useState(null);
+
+   const handleOnchange=(event)=>{setValue(event.target.value);};
+   const adding=()=>{
+   setTodos(todos.concat([value]));
+   console.log("hi");
+   setValue("");
+   };
+
+
+   return (
+   <div>
+   <input type="text" value={value} onChange={handleOnchange} style={{width:"35%",height:"55px",position:"absolute",left:"415px"}} />
+   <button onClick={adding} style={{position:"absolute",left:"955px",top:"25px"}}>click</button>
+    <ul style={{position:"absolute",left:"555px"}}>
+      {todos.map((todo,index)=>(<div style={{position:"relative",top:"55px",border:"1px solid blue"}}>
+        <input key={index} onClick={()=>{setColor(index)}} style={{display:"inline",marginRight:"35px"}} type="checkbox"/>
+        <li  style={{display:"inline",color:index==color ? "red":"blue"}}  key={index} >{todo}</li>
+        <button  style={{display:"inline",marginLeft:"85px"}} onClick={() =>
+                    setTodos(todos.filter((count, i) => index !== i))
+                  }>clear</button></div>))}
+  </ul>
+  </div>)
+
+ };
+
+  ReactDOM.render(<App/>,document.getElementById("a"));
+
+  
+    </script>
+  </body>
+</html>
